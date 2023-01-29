@@ -22,7 +22,7 @@ else:
 
     for title, content in articles.items():
         try:
-            resp = api.send_message("Can you summarize this article \n\n" + content)
+            resp = api.send_message("Can you summarize this article, whilsts keeping all the important information such as numbers and data. \n\n" + content)
             if "message" in resp:
                 with open("data/summarize/" + title, "w") as f:
                     f.write(resp["message"].replace(".", ".\n"))
@@ -31,4 +31,9 @@ else:
             print(f"Error: Article {title} is too long.")
             with open("data/summarize/" + title, "w") as f:
                 f.write("Error: Article is too long.")
+
+    for file in os.listdir():
+        if file.endswith(".png"):
+            os.remove(file)
+
 
